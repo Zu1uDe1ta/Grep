@@ -12,36 +12,73 @@ Inside of the data directory there is a file called "transaction_data_daily_even
 
 Use grep to find all instances where the upload was initiated. 
 ```
-PROVIDE A SOLUTION HERE
+(base) zipcodersMBP13:data cchavez$ grep -r -p "started" transaction_data_daily_event_log_20190129.dat 
+transaction_data_daily_event_log_20190129.dat:DIDLM230::transaction_data_upload_started_00_20190129_000000
+transaction_data_daily_event_log_20190129.dat:DIDLM230::transaction_data_upload_started_01_20190129_020000
+transaction_data_daily_event_log_20190129.dat:DIDLM230::transaction_data_upload_started_02_20190129_040000
+transaction_data_daily_event_log_20190129.dat:DIDLM230::transaction_data_upload_started_03_20190129_060000
+transaction_data_daily_event_log_20190129.dat:DIDLM230::transaction_data_upload_started_04_20190129_080000
+transaction_data_daily_event_log_20190129.dat:DIDLM230::transaction_data_upload_started_05_20190129_100000
+transaction_data_daily_event_log_20190129.dat:DIDLM230::transaction_data_upload_started_06_20190129_120000
+transaction_data_daily_event_log_20190129.dat:DIDLM230::transaction_data_upload_started_07_20190129_140000
+transaction_data_daily_event_log_20190129.dat:DIDLM230::transaction_data_upload_started_08_20190129_160000
+transaction_data_daily_event_log_20190129.dat:DIDLM230::transaction_data_upload_started_09_20190129_180000
+transaction_data_daily_event_log_20190129.dat:DIDLM230::transaction_data_upload_started_10_20190129_200000
+transaction_data_daily_event_log_20190129.dat:DIDLM230::transaction_data_upload_started_11_20190129_220000
 ```
 
 Once you've reviewed these results, repeat the process but this time using the -c flag to determine how many matching occurences were found.
 ```
-PROVIDE A SOLUTION HERE
+(base) zipcodersMBP13:data cchavez$ grep -c -p "started" transaction_data_daily_event_log_20190129.dat 
+12
+
 ```
 
 
 Use grep to find all instances where the upload was successful. 
 ```
-PROVIDE A SOLUTION HERE
+(base) zipcodersMBP13:data cchavez$ grep -r -p "complete" transaction_data_daily_event_log_20190129.dat
+transaction_data_daily_event_log_20190129.dat:DIDLM230::transaction_data_upload_complete_00_20190129_000053
+transaction_data_daily_event_log_20190129.dat:DIDLM230::transaction_data_upload_complete_01_20190129_020035
+transaction_data_daily_event_log_20190129.dat:DIDLM230::transaction_data_upload_complete_02_20190129_040015
+transaction_data_daily_event_log_20190129.dat:DIDLM230::transaction_data_upload_complete_03_20190129_060124
+transaction_data_daily_event_log_20190129.dat:DIDLM230::transaction_data_upload_complete_04_20190129_083522
+transaction_data_daily_event_log_20190129.dat:DIDLM230::transaction_data_upload_complete_05_20190129_102311
+transaction_data_daily_event_log_20190129.dat:DIDLM230::transaction_data_upload_complete_06_20190129_121750
+transaction_data_daily_event_log_20190129.dat:DIDLM230::transaction_data_upload_complete_07_20190129_141306
+transaction_data_daily_event_log_20190129.dat:DIDLM230::transaction_data_upload_complete_08_20190129_161148
+transaction_data_daily_event_log_20190129.dat:DIDLM230::transaction_data_upload_complete_09_20190129_180912
+transaction_data_daily_event_log_20190129.dat:DIDLM230::transaction_data_upload_complete_10_20190129_200405
+transaction_data_daily_event_log_20190129.dat:DIDLM230::transaction_data_upload_complete_11_20190129_220110
 ```
 
 Once you've reviewed these results, determine how many matching occurrences were found. This time instead of using the -c flag, pipe the result to the wc program.
 ```
-PROVIDE A SOLUTION HERE
+(base) zipcodersMBP13:data cchavez$ grep -c "complete" transaction_data_daily_event_log_20190129.dat
+12
+
+grep -wc l transaction_data_daily_event_log_20190129.dat
 ```
 
 
 Use grep to find all instances where the upload failed. Ensure your output displays the line numbers for each match.
 
 ```
-PROVIDE A SOLUTION HERE
+(base) zipcodersMBP13:data cchavez$ grep -r -p "failure" transaction_data_daily_event_log_20190129.dat
+transaction_data_daily_event_log_20190129.dat:DIDLM230::transaction_data_upload_failure_04_20190129_080133::WEAKSIGNAL
+transaction_data_daily_event_log_20190129.dat:DIDLM230::transaction_data_upload_failure_06_20190129_120000::SYSTMAINTE
+transaction_data_daily_event_log_20190129.dat:DIDLM230::transaction_data_upload_failure_07_20190129_140754::WEAKSIGNAL
+transaction_data_daily_event_log_20190129.dat:DIDLM230::transaction_data_upload_failure_09_20190129_180000::SYSOFFLINE
+
 ```
 
 Upon review, we would like to only view failures with error code SYSOFFLINE or WEAKSIGNAL.
 
 ```
-PROVIDE A SOLUTION HERE
+(base) zipcodersMBP13:data cchavez$ grep -r -p 'SYSOFFLINE\|WEAKSIGNAL' transaction_data_daily_event_log_20190129.dat
+transaction_data_daily_event_log_20190129.dat:DIDLM230::transaction_data_upload_failure_04_20190129_080133::WEAKSIGNAL
+transaction_data_daily_event_log_20190129.dat:DIDLM230::transaction_data_upload_failure_07_20190129_140754::WEAKSIGNAL
+transaction_data_daily_event_log_20190129.dat:DIDLM230::transaction_data_upload_failure_09_20190129_180000::SYSOFFLINE
 ```
 
 
@@ -51,13 +88,67 @@ Inside the data directory, there is a file called "users.csv". This file contain
 
 Identify users that have email addresses with six or less characters before the @ symbol where none of these characters are numbers.
 ```
-PROVIDE A SOLUTION HERE
+(base) zipcodes-MacBook-Pro-4:data cchavez$ grep ",[A-Za-z]\{6\}@" users.csv
+480,Beryle,Eve,bevedb@techcrunch.com,59.79.251.180,945-385-2799
+755,Conrade,Pre,cpreky@flickr.com,163.89.236.104,426-490-2406
 ```
 
 
 Marketing research has shown that the paper business is picking up in the academia space. Corporate has requested a list of all registered users that have an edu emaill address. Use grep to find the appropriate lines and output the results to a file called academia_users.txt.
 ```
-PROVIDE A SOLUTION HERE
+(base) zipcodes-MacBook-Pro-4:data cchavez$ grep -r -p "\.edu" users.csv
+users.csv:11,Linea,McLay,lmclaya@uiuc.edu,159.139.195.14,410-226-8687
+users.csv:30,Penny,Walentynowicz,pwalentynowiczt@umn.edu,80.35.38.181,376-264-5106
+users.csv:66,Giovanna,Ikin,gikin1t@si.edu,84.141.55.212,618-586-8030
+users.csv:77,Tammy,Rays,trays24@cmu.edu,26.39.169.9,337-270-4088
+users.csv:95,Skipper,Goodie,sgoodie2m@msu.edu,206.40.253.174,455-626-7455
+users.csv:124,Shannen,Hurdwell,shurdwell3f@columbia.edu,166.201.7.251,264-575-3225
+users.csv:134,Randie,Khoter,rkhoter3p@stanford.edu,155.33.72.221,440-188-1770
+users.csv:163,Sullivan,Fishley,sfishley4i@nyu.edu,162.186.60.226,734-605-8322
+users.csv:166,Dulcia,Beed,dbeed4l@columbia.edu,253.114.195.18,796-497-4163
+users.csv:231,Arlene,Barwise,abarwise6e@berkeley.edu,140.182.61.30,965-207-1243
+users.csv:237,Shena,Stormouth,sstormouth6k@harvard.edu,155.9.64.156,713-754-9799
+users.csv:273,Lebbie,Aspinell,laspinell7k@nyu.edu,107.32.253.187,903-513-8704
+users.csv:291,Ezmeralda,Ingarfill,eingarfill82@uiuc.edu,134.80.96.11,656-353-6509
+users.csv:297,Aarika,McKmurrie,amckmurrie88@nyu.edu,28.215.182.169,532-761-1770
+users.csv:324,Joelle,Mingaye,jmingaye8z@umn.edu,47.59.133.140,887-353-8207
+users.csv:348,Ashlie,Gaunson,agaunson9n@cmu.edu,63.34.248.212,912-812-5746
+users.csv:349,Judah,Tribbeck,jtribbeck9o@umn.edu,135.10.137.215,149-514-2084
+users.csv:353,Yorgos,Hinstridge,yhinstridge9s@princeton.edu,81.194.125.21,568-353-2361
+users.csv:362,Abramo,Lunt,alunta1@mit.edu,0.234.2.75,916-583-2111
+users.csv:412,Lanni,McGaugie,lmcgaugiebf@cmu.edu,42.136.29.152,615-626-8148
+users.csv:416,Friederike,Silverwood,fsilverwoodbj@upenn.edu,164.153.34.81,329-153-9873
+users.csv:418,Row,Gianullo,rgianullobl@umich.edu,1.213.103.36,723-364-6712
+users.csv:459,Ev,Kiloh,ekilohcq@ucla.edu,128.212.69.1,727-831-9330
+users.csv:491,Rosabel,Minigo,rminigodm@utexas.edu,160.6.160.74,268-427-3019
+users.csv:539,Rosetta,Hissett,rhissettey@ucla.edu,123.182.56.32,510-991-9687
+users.csv:548,Merl,Robillard,mrobillardf7@virginia.edu,45.189.60.248,351-108-9539
+users.csv:549,Ignacius,Stanistrete,istanistretef8@harvard.edu,97.155.130.154,121-520-3218
+users.csv:554,Ferd,Stile,fstilefd@berkeley.edu,199.171.73.114,673-688-1329
+users.csv:602,Chilton,Banghe,cbanghegp@uiuc.edu,0.115.249.177,838-224-7848
+users.csv:622,Arel,Braunds,abraundsh9@msu.edu,236.112.91.143,466-221-7308
+users.csv:641,Brodie,Calton,bcaltonhs@psu.edu,67.104.46.130,335-985-1737
+users.csv:644,Fanchette,Blannin,fblanninhv@ucsd.edu,36.38.67.204,838-348-2649
+users.csv:713,Hilary,Semered,hsemeredjs@wisc.edu,106.114.58.58,370-525-4273
+users.csv:724,Vin,Deetlefs,vdeetlefsk3@berkeley.edu,219.189.68.70,889-381-8402
+users.csv:729,Heather,Ashborn,hashbornk8@virginia.edu,177.220.28.23,595-598-0666
+users.csv:734,Livvie,Saban,lsabankd@virginia.edu,97.213.120.40,247-195-8420
+users.csv:750,Othella,Beltzner,obeltznerkt@wisc.edu,161.6.21.206,351-953-8521
+users.csv:761,Burnard,Filipowicz,bfilipowiczl4@umich.edu,208.110.135.72,609-976-9632
+users.csv:767,Cornelius,Bullock,cbullockla@umn.edu,165.195.60.90,777-917-5198
+users.csv:791,Hall,Smitheman,hsmithemanly@arizona.edu,81.145.99.173,410-165-5696
+users.csv:811,Shoshana,Quilleash,squilleashmi@msu.edu,44.10.56.95,828-754-7267
+users.csv:886,Josi,Woodcroft,jwoodcroftol@cmu.edu,113.107.146.136,639-717-1491
+users.csv:900,Starlin,Danahar,sdanaharoz@umich.edu,253.117.105.171,965-731-2755
+users.csv:916,Nanete,McKeveney,nmckeveneypf@yale.edu,147.240.159.25,298-925-6025
+users.csv:933,Nessa,Roberds,nroberdspw@nyu.edu,92.77.33.210,540-258-1224
+users.csv:934,Luca,Coulthurst,lcoulthurstpx@umn.edu,5.5.4.176,344-701-1265
+users.csv:947,Remington,O'Teague,roteagueqa@tamu.edu,46.250.66.35,365-675-4415
+users.csv:954,Lindie,Bewick,lbewickqh@yale.edu,171.160.21.165,577-926-9114
+users.csv:979,Rolf,Glendza,rglendzar6@berkeley.edu,45.55.128.36,376-755-1469
+users.csv:984,Sharl,Martins,smartinsrb@umich.edu,54.27.126.194,936-807-7272
+users.csv:985,Melany,Sandeford,msandefordrc@columbia.edu,49.54.65.133,555-411-5173
+
 ```
 
 
@@ -67,7 +158,9 @@ Ryan Howard did a poor job and used the CC field rather than the BCC field for t
 
 Use grep to identify the user with a single regex pattern.
 ```
-PROVIDE A SOLUTION HERE
+(base) zipcodersMBP13:data cchavez$ ggrep -r ',38.-' users.csv | grep -r ',184'
+(standard input):24,Clarice,Curwood,ccurwoodn@typepad.com,184.223.202.53,380-764-9066
+
 ```
 
 
@@ -98,5 +191,11 @@ This regex expression will ultimately be part of an automated data pipeline so w
 * Each field must be separated by a tab character.
 
 ```
-PROVIDE A SOLUTION HERE
+^1\d{+}$\t;
+^A-Z$\t;
+^A-Z$\t;
+^Software|Developer$\t;
+^[^0-9]$\t;
+^state$\t;
+
 ```
